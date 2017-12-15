@@ -6,35 +6,35 @@
 //Particle class
 class Particle {
 public:
-    Particle();                //Class constructor
-    void setup();              //Start particle
-    void update( float dt );   //Recalculate physics
-    void draw();               //Draw particle
+    Particle();
+    void setup();
+    void update( float dt );
+    void draw();
     
-    ofPoint pos;               //Position
-    ofPoint vel;               //Velocity
-    float time;                //Time of living
-    float lifeTime;            //Allowed lifetime
-    bool live;                 //Is particle live
+    ofPoint pos;
+    ofPoint vel;
+    float time;
+    float lifeTime;
+    bool live;
 };
 
-//Control parameters class
+
 class Params {
 public:
     void setup();
-    ofPoint eCenter;    //Emitter center
-    float eRad;         //Emitter radius
-    float velRad;       //Initial velocity limit
-    float lifeTime;     //Lifetime in seconds
+    ofPoint eCenter;
+    float eRad;
+    float velRad;
+    float lifeTime;
     
-    float rotate;   //Direction rotation speed in angles per second
+    float rotate;
     
-    float force;       //Attraction/repulsion force inside emitter
-    float spinning;    //Spinning force inside emitter
-    float friction;    //Friction, in the range [0, 1]
+    float force;
+    float spinning;
+    float friction;
 };
 
-extern Params params; //Declaration of a global variable
+extern Params params; 
 
 
 //------------ GUI --------------

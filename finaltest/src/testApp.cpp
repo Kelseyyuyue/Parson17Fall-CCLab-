@@ -47,32 +47,32 @@ void Particle::setup() {
 
 void Particle::update( float dt ){
     if ( live ) {
-        //Rotate vel
+        
         vel.rotate( 0, 0, param.rotate * dt );
         
-        ofPoint acc;         //Acceleration
+        ofPoint acc;
         ofPoint delta = pos - param.eCenter;
         float len = delta.length();
         if ( ofInRange( len, 0, param.eRad ) ) {
             delta.normalize();
             
-            //Attraction/repulsion force
+           
             acc += delta * param.force;
             
-            //Spinning force
+            
             acc.x += -delta.y * param.spinning;
             acc.y += delta.x * param.spinning;
         }
-        vel += acc * dt;            //Euler method
-        vel *= (1-param.friction);  //Friction
+        vel += acc * dt;
+        vel *= (1-param.friction);
         
-        //Update pos
-        pos += vel * dt;    //Euler method
+       
+        pos += vel * dt;
         
-        //Update time and check if particle should die
+        
         time += dt;
         if ( time >= lifeTime ) {
-            live = false;   //Particle is now considered as died
+            live = false;
         }
     }
 }
@@ -80,17 +80,17 @@ void Particle::update( float dt ){
 //--------------------------------------------------------------
 void Particle::draw(){
     if ( live ) {
-        //Compute size
+        
         float size = ofMap(
                            fabs(time - lifeTime/2), 0, lifeTime/2, 3, 1 );
         
-        //Compute color
+
         ofColor color = ofColor::red;
         float hue = ofMap( time, 0, lifeTime, 128, 255 );
         color.setHue( hue );
         ofSetColor( color );
         
-        ofCircle( pos, size );  //Draw particle
+        ofCircle( pos, size );
     }
 }
 
@@ -98,27 +98,27 @@ void Particle::draw(){
 //----------------------  testApp  -----------------------------
 
 void testApp::setup(){
-    ofSetFrameRate( 60 );    //Set screen frame rate
+    ofSetFrameRate( 60 );
     
-    //Allocate drawing buffer
+    
     int w = ofGetWidth();
     int h = ofGetHeight();
     fbo.allocate( w, h, GL_RGB32F_ARB );
     
-    //Fill buffer with white color
+    
     fbo.begin();
     ofBackground(255, 255, 255);
     fbo.end();
     
-    //Set up parameters
-    param.setup();        //Global parameters
+    
+    param.setup();
     history = 0.9;
     bornRate = 1500;
     
     bornCount = 0;
     time0 = ofGetElapsedTimef();
     
-    //GUI
+   
     interf.setup();
     interf.addSlider( "eRad", &param.eRad, 0, 800 );
    
@@ -299,15 +299,15 @@ void Interface::load( int index )
 //----------------------  testApp again  -----------------------
 
 void testApp::keyPressed(int key){
-    if ( key == OF_KEY_RETURN ) {    //Hide/show GUI
+    if ( key == OF_KEY_RETURN ) {
         drawInterface = !drawInterface;
     }
     
-    if ( key == ' ' ) {        //Grab the screen image to file
+    if ( key == ' ' ) {
         ofImage image;
         image.grabScreen( 0, 0, ofGetWidth(), ofGetHeight() );
         
-        //Select random file name
+        
         int n = ofRandom( 0, 1000 );
         string fileName = "screen" + ofToString( n ) + ".png";
         
